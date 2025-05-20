@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { LoginForm } from "@/components/login-form"
@@ -5,11 +7,6 @@ import { LoginForm } from "@/components/login-form"
 interface FormData {
   username: string
   password: string
-}
-
-interface LoginProps {
-  onSubmit: (formData: FormData) => Promise<void>
-  error: string
 }
 
 export default function LoginPage() {

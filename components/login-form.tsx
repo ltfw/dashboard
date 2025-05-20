@@ -26,6 +26,8 @@ export function LoginForm({
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
+    console.log(formData);
+    
     const data = {
       username: formData.get('username') as string,
       password: formData.get('password') as string,
@@ -49,6 +51,7 @@ export function LoginForm({
                 <Label htmlFor="username">Username</Label>
                 <Input
                   id="username"
+                  name="username"
                   type="text"
                   placeholder="Username"
                   required
@@ -64,7 +67,7 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" name="password" type="password" required />
               </div>
               {error && <p className="text-red-500 text-sm">{error}</p>}
               <Button type="submit" className="w-full">
@@ -72,13 +75,13 @@ export function LoginForm({
               </Button>
             </div>
           </form>
-          <div className="bg-muted relative hidden md:block">
+            <div className="bg-white relative hidden md:flex items-center justify-center">
             <img
-              src="/placeholder.svg"
+              src="/images/logo.png"
               alt="Image"
-              className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+              className="max-h-60 max-w-60 object-contain"
             />
-          </div>
+            </div>
         </CardContent>
       </Card>
     </div>
