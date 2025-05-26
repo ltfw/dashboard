@@ -4,6 +4,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { FormEvent } from "react"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { AlertCircle } from "lucide-react"
 
 interface FormData {
   username: string
@@ -27,7 +29,7 @@ export function LoginForm({
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     console.log(formData);
-    
+
     const data = {
       username: formData.get('username') as string,
       password: formData.get('password') as string,
@@ -69,19 +71,27 @@ export function LoginForm({
                 </div>
                 <Input id="password" name="password" type="password" required />
               </div>
-              {error && <p className="text-red-500 text-sm">{error}</p>}
+              {error && (
+                <Alert variant="destructive">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertTitle>Error</AlertTitle>
+                  <AlertDescription>
+                    {error}
+                  </AlertDescription>
+                </Alert>
+              )}
               <Button type="submit" className="w-full">
                 Login
               </Button>
             </div>
           </form>
-            <div className="bg-white relative hidden md:flex items-center justify-center">
+          <div className="bg-white relative hidden md:flex items-center justify-center">
             <img
               src="/images/logo.png"
               alt="Image"
               className="max-h-60 max-w-60 object-contain"
             />
-            </div>
+          </div>
         </CardContent>
       </Card>
     </div>
