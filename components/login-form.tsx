@@ -3,9 +3,13 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+<<<<<<< HEAD
 import { FormEvent } from "react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
+=======
+import { FormEvent, useState } from "react"
+>>>>>>> 23cdec06dd8c661bd55c9b3ba5880676621a7b39
 
 interface FormData {
   username: string
@@ -25,16 +29,32 @@ export function LoginForm({
   error,
   ...props
 }: LoginProps) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+<<<<<<< HEAD
     const formData = new FormData(e.currentTarget)
     console.log(formData);
 
     const data = {
       username: formData.get('username') as string,
       password: formData.get('password') as string,
+=======
+    setIsLoading(true);
+    try {
+      const formData = new FormData(e.currentTarget)
+      console.log(formData);
+      
+      const data = {
+        username: formData.get('username') as string,
+        password: formData.get('password') as string,
+      }
+      await onSubmit(data)
+    } finally {
+      setIsLoading(false);
+>>>>>>> 23cdec06dd8c661bd55c9b3ba5880676621a7b39
     }
-    await onSubmit(data)
   }
 
   return (
@@ -71,18 +91,10 @@ export function LoginForm({
                 </div>
                 <Input id="password" name="password" type="password" required />
               </div>
-              {error && (
-                <Alert variant="destructive">
-                  <AlertCircle className="h-4 w-4" />
-                  <AlertTitle>Error</AlertTitle>
-                  <AlertDescription>
-                    {error}
-                  </AlertDescription>
-                </Alert>
-              )}
-              <Button type="submit" className="w-full">
-                Login
-              </Button>
+              {error && <p className="text-red-500 text-sm">{error}</p>}
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? "Loading..." : "Login"}
+                </Button>
             </div>
           </form>
           <div className="bg-white relative hidden md:flex items-center justify-center">
